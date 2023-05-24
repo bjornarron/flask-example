@@ -18,7 +18,7 @@ jobs:
           docker system prune -af
           docker build -t ghcr.io/bjornarron/flask-example .
           docker login ghcr.io --username bjornarron --password ${{ secrets.PAT_DEVOPS }}
-          docker push -f ghcr.io/bjornarron/flask-example
+          docker push ghcr.io/bjornarron/flask-example
   deploy:
     runs-on: deployment
     steps:
