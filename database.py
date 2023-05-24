@@ -4,7 +4,7 @@ import datetime
 
 # PostgreSQL connection details
 conn_params = {
-    "host": "172.24.0.3",
+    "host": "localhost",
     "port": "5432",
     "database": "postgres",
     "user": "postgres",
