@@ -29,8 +29,9 @@ jobs:
       - name: Deploy docker image for flask on VM
         run: |
             docker login ghcr.io --username bjornarron --password ${{ secrets.PAT_DEVOPS }}
-            docker system prune -af
             docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+            docker system prune -af
+            docker pull ghcr.io/bjornarron/flask-example:latest
             docker compose up -d
 
 
