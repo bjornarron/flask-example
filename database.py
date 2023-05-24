@@ -117,4 +117,36 @@ def list_images_for_user(owner):
     conn = psycopg2.connect(**conn_params)
     cur = conn.cursor()
 
-    command = "SELECT uid, timestamp, name
+    command = "SELECT uid, timestamp, name FROM images WHERE owner = %s"
+    cur.execute(command, (owner,))
+    result = cur.fetchall()
+
+    conn.close()
+
+    return result
+
+def match_user_id_with_image_uid(image_uid):
+    conn = psycopg2.connect(**conn_params)
+    cur = conn.cursor()
+
+    command = "SELECT owner FROM images WHERE uid = %s;"
+    cur.execute(command, (image_uid,))
+    result = cur.fetchone()[0]
+
+    conn.close()
+
+    return result
+
+def delete_image_from_db(image_uid):
+    conn = psycopg2.connect(**conn_params)
+    cur = conn.cursor()
+
+    command = "DELETE FROM images WHERE uid = %s;"
+    cur.execute(command, (image_uid,))
+    conn.commit()
+
+    conn.close()
+
+
+if __name__ == "__main__":
+    print(list_users())
