@@ -2,6 +2,10 @@ import psycopg2
 import hashlib
 import datetime
 
+
+user_db_file_location = "database_file/users.db"
+note_db_file_location = "database_file/notes.db"
+image_db_file_location = "database_file/images.db"
 # PostgreSQL connection details
 conn_params = {
     "host": "localhost",
