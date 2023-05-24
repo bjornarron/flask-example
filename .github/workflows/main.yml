@@ -15,6 +15,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
+          docker system prune -af
           docker build -t ghcr.io/bjornarron/flask-example .
           docker login ghcr.io --username bjornarron --password ${{ secrets.PAT_DEVOPS }}
           docker push -f ghcr.io/bjornarron/flask-example
