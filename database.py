@@ -10,7 +10,6 @@ image_db_file_location = "database_file/images.db"
 conn_params = {
     "host": "localhost",
     "port": "5432",
-    "database": "postgres",
     "user": "postgres",
     "password": "postgres",
 }
