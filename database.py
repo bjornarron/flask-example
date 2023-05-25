@@ -15,31 +15,6 @@ conn_params = {
     "password": "postgres",
 }
 
-
-def migrate_users():
-    # Connect to SQLite database and retrieve user data
-    sqlite_conn = sqlite3.connect(sqlite_user_db_file_location)
-    sqlite_cursor = sqlite_conn.cursor()
-
-    sqlite_cursor.execute("SELECT id, pw FROM users")
-    user_data = sqlite_cursor.fetchall()
-
-    # Connect to PostgreSQL database
-    postgres_conn = psycopg2.connect(**conn_params)
-    postgres_cursor = postgres_conn.cursor()
-
-    # Migrate user data
-    for user in user_data:
-        id, pw = user
-        hashed_pw = hashlib.sha256(pw.encode()).hexdigest()
-        postgres_cursor.execute("INSERT INTO users (id, pw) VALUES (%s, %s)", (id.upper(), hashed_pw))
-
-    # Commit changes and close connections
-    postgres_conn.commit()
-    postgres_conn.close()
-    sqlite_conn.close()
-
-
 def list_users():
     conn = psycopg2.connect(**conn_params)
     cur = conn.cursor()
