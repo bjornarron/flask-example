@@ -1,8 +1,8 @@
 services:
   flask-app:
     image: ghcr.io/bjornarron/flask-example:latest
-    ports:
-      - '5000:5000'
+    expose:
+      - 5000
     depends_on:
       - postgres-db
   postgres-db:
@@ -13,3 +13,11 @@ services:
       - POSTGRES_DB=postgres
     ports:
       - '5432:5432'
+  nginx:
+    image: nginx:latest
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - flask-app
