@@ -10,6 +10,7 @@ conn_params = {
     "user": "postgres",
     "password": "postgres",
 }
+
 def list_users():
     conn = psycopg2.connect(**conn_params)
     cur = conn.cursor()
